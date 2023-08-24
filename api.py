@@ -2,7 +2,7 @@ import openai
 
 
 def get_completion(
-    prompt, system_message, api_key, n=1, model="gpt-3.5-turbo", max_tokens=2500
+    prompt, system_message, api_key, n=1, model="gpt-3.5-turbo", max_tokens=10000
 ):
     """
     Get a chat completion from OpenAI's API.
