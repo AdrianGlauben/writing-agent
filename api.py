@@ -1,9 +1,7 @@
 import openai
 
 
-def get_completion(
-    prompt, system_message, api_key, n=1, model="gpt-3.5-turbo", max_tokens=10000
-):
+def get_completion(prompt, system_message, api_key, n=1, model="gpt-3.5-turbo"):
     """
     Get a chat completion from OpenAI's API.
 
@@ -27,7 +25,21 @@ def get_completion(
             {"role": "user", "content": prompt},
         ],
         n=n,
-        max_tokens=max_tokens,
     )
 
     return [choice.message.content for choice in response.choices]
+
+
+def get_chat_completion(
+    messages, api_key, n=1, model="gpt-3.5-turbo", max_tokens=10000
+):
+    openai.api_key = api_key
+
+    response = openai.ChatCompletion.create(
+        model=model,
+        messages=messages,
+        n=n,
+        max_tokens=max_tokens,
+    )
+
+    return response.choices[0].message.content
